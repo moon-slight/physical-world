@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class system : MonoBehaviour {
 
+    string[] stage = {"stage1", "stage2"};
+    int n = 0, total = 2;
+
     public void clickmenu()
     {
         SceneManager.LoadScene("menu", LoadSceneMode.Single);
@@ -11,11 +14,12 @@ public class system : MonoBehaviour {
 
     public void clicknext()
     {
-        SceneManager.LoadScene("stage1", LoadSceneMode.Additive);
+        SceneManager.LoadScene(stage[n], LoadSceneMode.Single);
+        n = (n+1)%total;
     }
 
     public void clickrestart()
     {
-        SceneManager.LoadScene("stage1", LoadSceneMode.Single);
+        SceneManager.LoadScene(stage[n], LoadSceneMode.Single);
     }
 }

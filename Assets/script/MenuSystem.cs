@@ -18,4 +18,19 @@ public class MenuSystem : MonoBehaviour {
     {
         SceneManager.LoadScene("stage1", LoadSceneMode.Single);
     }
+
+    public void store()
+    {
+        SceneManager.LoadScene("store", LoadSceneMode.Single);
+    }
+
+    public void setting()
+    {
+        SceneManager.LoadScene("setting", LoadSceneMode.Single);
+    }
+
+    public void exit()
+    {
+        Application.Quit();
+    }
 }

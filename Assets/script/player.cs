@@ -52,7 +52,7 @@ public class player : MonoBehaviour{
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
         if (isable)
         {
