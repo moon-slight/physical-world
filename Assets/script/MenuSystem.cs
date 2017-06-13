@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuSystem : MonoBehaviour {
 
+    public GameObject option;
+
 	// Use this for initialization
 	void Start () {
-	
+        option.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -24,9 +26,14 @@ public class MenuSystem : MonoBehaviour {
         SceneManager.LoadScene("store", LoadSceneMode.Single);
     }
 
-    public void setting()
+    public void clickSetting()
     {
-        SceneManager.LoadScene("setting", LoadSceneMode.Single);
+        option.SetActive(true);
+    }
+
+    public void clickBack()
+    {
+        option.SetActive(false);
     }
 
     public void exit()

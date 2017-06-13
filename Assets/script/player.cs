@@ -5,17 +5,9 @@ using System.Collections;
 public class player : MonoBehaviour{
 
     public Image shadow;
-    public Text t_gameover;
-    public Text t_clear;
     public Text t_mention;
-    public Button left;
-    public Button right;
-    public Button jump;
-    public Button menu;
-    public Button restart;
-    public Button nest_stage;
 
-    private bool isable;
+    private bool moveable;
     private bool mention;
     private float moveSpeed;                    //移動速度
     private float height;                         //跳躍高度
@@ -25,18 +17,8 @@ public class player : MonoBehaviour{
 
 	// Use this for initialization
     void Start () {
-        left.enabled = true;
-        right.enabled = true;
-        jump.enabled = true;
         shadow.enabled = false;
-        menu.enabled = false;
-        menu.image.enabled = false;
-        restart.enabled = false;
-        restart.image.enabled = false;
-        nest_stage.enabled = false;
-        nest_stage.image.enabled = false;
-        
-        isable = true;
+        moveable = false;
         mention = true;
         moveSpeed = 5f; // 玩家移動速度
         height = 7f;
@@ -53,8 +35,8 @@ public class player : MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (isable)
+        
+        if (moveable)
         {
             // 左右移動與跳躍
             if (Input.GetKey("a"))
@@ -76,20 +58,21 @@ public class player : MonoBehaviour{
             // 重力反轉
             if (Input.GetKeyDown("q") && !mention)
             {
-                isable = false;
+                moveable = false;
                 gravity.y = -gravity.y;
                 Physics.gravity = gravity;
-                isable = true;
+                moveable = true;
                 n = (n + 1) % 2;
             }
         }
 
         if (Input.GetKey("z"))
         {
-            mention = false;
+            if(t_mention.enabled == true)
+                mention = false;
             shadow.enabled = false;
             t_mention.enabled = false;
-            isable = true;
+            moveable = true;
         }
 
         // 沒按左右時原地停止不動
@@ -110,52 +93,26 @@ public class player : MonoBehaviour{
 
     void OnTriggerEnter(Collider trigger)
     {
-        // 通關
-        if (trigger.gameObject.name == "goal")
+        switch (trigger.gameObject.name)
         {
-            t_clear.enabled = true;
-            menu.enabled = true;
-            menu.image.enabled = true;
-            nest_stage.enabled = true;
-            nest_stage.image.enabled = true;
-            isable = false;
+            case "goal": // 通關
+                moveable = false;
+                break;
+
+            case "mention": // 提示
+                if (mention)
+                {
+                    t_mention.enabled = true;
+                    shadow.enabled = true;
+                    moveable = false;
+                }
+                break;
+
+            case "down side": //死亡
+            case "up side":
+                moveable = false;
+                break;
         }
 
-        // 重力使用的提示
-        if (trigger.gameObject.name == "mention" && mention)
-        {
-            t_mention.enabled = true;
-            shadow.enabled = true;
-            isable = false;
-        }
-
-        // 死亡
-        if (trigger.gameObject.name == "down side" || trigger.gameObject.name == "up side")
-        {
-            t_gameover.enabled = true;
-            shadow.enabled = true;
-            menu.enabled = true;
-            menu.image.enabled = true;
-            restart.enabled = true;
-            restart.image.enabled = true;
-            isable = false;
-        }
-    }
-
-    public void goleft()
-    {
-        n = n % 2 + 2;
-        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime * Time.timeScale);
-    }
-
-    public void goright()
-    {
-        n = (n + 2) % 2;
-        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime * Time.timeScale);
-    }
-
-    public void jumpup()
-    {
-        transform.Translate(Vector3.up * height * Time.deltaTime * 1 / Time.timeScale);
     }
 }

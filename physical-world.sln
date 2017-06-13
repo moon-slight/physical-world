@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{4BDDE53B-0B3F-8B12-6CFF-05BF5288851F}") = "physical-world", "Assembly-CSharp.csproj", "{E6D92F72-D1B0-4D6F-2658-AC30E9D00529}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "physical-world", "Assembly-CSharp.csproj", "{E6D92F72-D1B0-4D6F-2658-AC30E9D00529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
