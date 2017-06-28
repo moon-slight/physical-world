@@ -6,12 +6,14 @@ public class player : MonoBehaviour{
 
     public Image shadow;
     public Text t_mention;
+    public GameObject model;
 
     private bool moveable;
     private bool mention;
     private float moveSpeed;                    //移動速度
     private float height;                         //跳躍高度
-    private Vector3[] rotate = new Vector3[4];  //固定角色旋轉量
+    private Vector3[] rotate = new Vector3[4];  //Player旋轉量
+    private Vector3[] m_rotate = new Vector3[4];  //Model旋轉量
     private int n;                              //旋轉量的選擇
     private Vector3 gravity;                    //重力
 
@@ -30,6 +32,14 @@ public class player : MonoBehaviour{
         rotate[1] = new Vector3(0, 180, 180);
         rotate[2] = new Vector3(0, 180, 0);
         rotate[3] = new Vector3(0, 0, 180);
+        m_rotate[0] = transform.rotation.eulerAngles;
+        m_rotate[1] = transform.rotation.eulerAngles;
+        m_rotate[2] = transform.rotation.eulerAngles;
+        m_rotate[3] = transform.rotation.eulerAngles;
+        m_rotate[0] = new Vector3(0, 50, 0);
+        m_rotate[1] = new Vector3(0, -130, 180);
+        m_rotate[2] = new Vector3(0, 130, 0);
+        m_rotate[3] = new Vector3(0, -50, 180);
         gravity = new Vector3(0f, -10f, 0f);
 	}
 	
@@ -88,7 +98,7 @@ public class player : MonoBehaviour{
 
         //固定x y z軸的旋轉量
         transform.rotation = Quaternion.Euler(rotate[n]);
-
+        model.transform.rotation = Quaternion.Euler(m_rotate[n]);
 	}
 
     void OnTriggerEnter(Collider trigger)
