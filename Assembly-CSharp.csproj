@@ -49,6 +49,8 @@
      <Compile Include="Assets\script\MenuSystem.cs" />
      <Compile Include="Assets\script\camera.cs" />
      <Compile Include="Assets\script\player.cs" />
+     <Compile Include="Assets\script\stage1.cs" />
+     <Compile Include="Assets\script\stage2.cs" />
      <Compile Include="Assets\script\store.cs" />
      <Compile Include="Assets\script\system.cs" />
  <Reference Include="UnityEngine.UI">
